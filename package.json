@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
+  "author": "Clément CHAMPOUILLON <clement@champouillon.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/cchampou/re"
