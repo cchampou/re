@@ -3,5 +3,9 @@
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cchampou/re"
+  }
 }
