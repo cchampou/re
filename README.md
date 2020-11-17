@@ -2,8 +2,8 @@
 
 ## FILESYSTEM
 
-- [ ] Check if file already exists
-- [ ] Create file if not
+- [x] Check if file already exists
+- [x] Create file if not
 
 ## NETWORK
 
