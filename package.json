@@ -1,12 +1,21 @@
 {
-  "name": "re",
+  "name": "server",
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
   "private": true,
   "author": "Clément CHAMPOUILLON <clement@champouillon.com>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/cchampou/re"
+  "repository": { "type": "git", "url": "https://github.com/cchampou/re" },
+  "esy": { "build": [ "dune build server.exe" ] },
+  "devDependencies": {
+    "@opam/dune": "2.7.1",
+    "@opam/merlin": "3.4.1",
+    "@opam/reason": "3.6.2",
+    "ocaml": "4.08.0"
+  },
+  "scripts": { "run": "./_esy/default/build/default/server.exe" },
+  "dependencies": {
+    "@opam/cohttp-lwt-unix": "3.0.0",
+    "@opam/yojson": "1.7.0"
   }
 }

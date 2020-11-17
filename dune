@@ -1,0 +1,4 @@
+(executable
+ (name server)
+ (libraries cohttp-lwt-unix yojson))
+(include_subdirs unqualified)
