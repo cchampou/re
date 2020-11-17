@@ -7,5 +7,6 @@
 
 ## NETWORK
 
-- [ ] Create request function
-- [ ] Validate token with API
+- [x] Create request function
+- [x] Validate token with API
+- [ ] Renew token if invalid

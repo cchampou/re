@@ -1,5 +1,4 @@
-open Lwt;
-open Cohttp_lwt_unix;
+open Yojson.Basic.Util;
 
 let getRemoteAccessToken = () => {
   let data =
@@ -10,20 +9,24 @@ let getRemoteAccessToken = () => {
     ]);
 
   let headers =
-    Cohttp.Header.add(
+    NetUtils.addHeader(
       Cohttp.Header.init(),
-      "content-type",
-      "application/json",
+      ("content-type", "application/json"),
     );
 
-  let body =
-    Client.post(
-      ~body=Cohttp_lwt.Body.of_string(data),
-      ~headers,
-      Uri.of_string(Config.twitchAuthApi),
-    )
-    >>= (((_, body)) => Cohttp_lwt.Body.to_string(body));
+  NetUtils.postRequest(~url=Config.twitchAuthApi, ~headers, ~data)
+  |> Yojson.Basic.from_string
+  |> member("access_token")
+  |> to_string;
+};
 
-  let body = Lwt_main.run(body);
-  body;
+let validateToken = token => {
+  let headers =
+    NetUtils.addHeader(
+      Cohttp.Header.init(),
+      ("Authorization", "Bearer " ++ token),
+    );
+
+  Logger.debug(Config.twitchAuthValidateApi);
+  NetUtils.getRequest(~url=Config.twitchAuthValidateApi, ~headers);
 };
