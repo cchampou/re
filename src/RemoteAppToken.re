@@ -1,15 +1,13 @@
 open Lwt;
 open Cohttp_lwt_unix;
 
-let getRemoteAccessToken = {
-  let typedData =
-    `Assoc([
-      ("client_id", `String(Config.clientId)),
-      ("client_secret", `String(Config.clientSecret)),
-      ("grant_type", `String("client_credentials")),
+let getRemoteAccessToken = () => {
+  let data =
+    Json.createJsonString([
+      ("client_id", Config.clientId),
+      ("client_secret", Config.clientSecret),
+      ("grant_type", "client_credentials"),
     ]);
-
-  let data = Yojson.Basic.pretty_to_string(typedData);
 
   let headers =
     Cohttp.Header.add(
@@ -27,5 +25,5 @@ let getRemoteAccessToken = {
     >>= (((_, body)) => Cohttp_lwt.Body.to_string(body));
 
   let body = Lwt_main.run(body);
-  print_endline(body);
+  body;
 };

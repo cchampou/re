@@ -8,3 +8,4 @@
 ## NETWORK
 
 - [ ] Create request function
+- [ ] Validate token with API

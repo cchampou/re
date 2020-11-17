@@ -1,16 +1,19 @@
-print_endline("\r")
+print_endline("\r");
 open Logger;
-
+open Yojson.Basic.Util;
 
 let previousToken = File.readFileFirstLine(Config.localAccessTokenFilename);
 
-switch(previousToken) {
-  | Some(data) => debug(data)
-  | None => warn("Line not found");
-}
+let token =
+  switch (previousToken) {
+  | Some(data) =>
+    debug("Local token found");
+    data;
+  | None =>
+    warn("Local token not found, getting new one");
+    let jsonData =
+      RemoteAppToken.getRemoteAccessToken() |> Yojson.Basic.from_string;
+    jsonData |> member("access_token") |> to_string;
+  };
 
-let fakeToken = "tokenToutPourri";
-
-File.writeLineToFile(Config.localAccessTokenFilename, fakeToken);
-
-
+File.writeLineToFile(Config.localAccessTokenFilename, token);
