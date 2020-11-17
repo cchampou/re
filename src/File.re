@@ -1,30 +1,20 @@
 open Printf;
-open Logger;
 
-let readFileFirstLine = filename => {
-  debug("Starting reading sequence for file " ++ filename);
-
-  let ic = open_in(filename);
-
-  let line = input_line(ic);
-
-  flush(stdout);
-  close_in(ic);
-
-  debug("Reading sequence complete, file closed");
-
-  line;
-};
-
+let readFileFirstLine = filename =>
+  switch (open_in(filename)) {
+  | exception _ => None
+  | ic =>
+    switch (input_line(ic)) {
+    | line =>
+      flush(stdout);
+      close_in(ic);
+      Some(line);
+    | exception _ => None;
+    }
+  };
 
 let writeLineToFile = (filename, line) => {
-  debug("Starting writing to file" ++ filename);
-
   let oc = open_out(filename);
-
   fprintf(oc, "%s", line);
-
   close_out(oc);
-
-  debug("Writing sequence complete, file closed");
-}
+};
