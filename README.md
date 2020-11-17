@@ -1,10 +1,10 @@
-### TODOS ###
+# TODOS #
 
-* FILESYSTEM
+## FILESYSTEM
 
 [ ] Check if file already exists
 [ ] Create file if not
 
-* NETWORK
+## NETWORK
 
 [ ] Create request function
